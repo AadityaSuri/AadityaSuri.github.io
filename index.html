@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Name - Software Engineer Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --background-color: #f9f9f9;
+            --text-color: #333;
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-color);
+            color: var(--text-color);
+        }
+        header {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        header p {
+            margin: 0.5rem 0 0;
+            font-size: 1.2rem;
+            opacity: 0.8;
+        }
+        nav {
+            background-color: var(--primary-color);
+            padding: 0.75rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+        }
+        nav ul li {
+            margin: 0 15px;
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: opacity 0.3s ease;
+        }
+        nav ul li a:hover {
+            opacity: 0.8;
+        }
+        main {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        section {
+            margin-bottom: 3rem;
+        }
+        h2 {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 0.5rem;
+        }
+        .clickable-item {
+            background-color: white;
+            border: 1px solid #ddd;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .clickable-item:hover {
+            background-color: #f0f0f0;
+        }
+        .clickable-item h3 {
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 2;
+        }
+        .clickable-item p {
+            position: relative;
+            z-index: 2;
+        }
+        .clickable-item {
+            position: relative;
+        }
+        .project-icon {
+            position: absolute;
+            right: 250px;
+            top: 50%;
+            transform: translateY(-50%);
+            max-width: 200px;
+            max-height: 200px;
+        }
+        .company-logo {
+            position: absolute;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 150px;
+            height: 150px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            opacity: 0.7;
+            z-index: 1;
+        }
+        .date-range {
+            font-style: italic;
+            color: #666;
+        }
+        /* .project-item {
+            background-color: white;
+            border: 1px solid #ddd;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .project-item:hover {
+            background-color: #f0f0f0;
+        } */
+        footer {
+            background-color: var(--secondary-color);
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+        @media (max-width: 600px) {
+            header h1 {
+                font-size: 2rem;
+            }
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            nav ul li {
+                margin: 5px 0;
+            }
+        }
+
+        .social-icons a, .social-icons a:visited {
+            color: var(--primary-color);
+            margin-right: 10px;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .social-icons a:hover, .social-icons a:active {
+            color: var(--secondary-color);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Aaditya Suri</h1> 
+        <p>Software Engineer (maybe?)</p>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+    <main>
+        <section id="about">
+            <h2>About Me</h2>
+            <p>I'm a 4th year computer engineering student at UBC, Canada.
+               Passionate about ML systems, firmware, hardware engineering, and building 3d models, among other stuff.
+            </p>
+
+            <p>
+               Seeking full time opportunities for 2025!
+            </p>
+        </section>
+        <section id="experience">
+            <h2>Work Experience</h2>
+            <div class="clickable-item" onclick="window.open('work_exp/citi.html', '_blank')">
+                <h3>Software Engineer Intern - Citi</h3>
+                <p class="date-range">May 2024 - August 2024</p>
+                <div class="company-logo" style="background-image: url('resources/citilogo.png')"></div>
+            </div>
+
+            <div class="clickable-item" onclick="window.open('work_exp/netgear.html', '_blank')">
+                <h3>RF Software Engineer Intern - Netgear</h3>
+                <p class="date-range">May 2023 - December 2023</p>
+                <div class="company-logo" style="background-image: url('resources/Netgear.png'); height: 200px; width: 200px; right: 10px;"></div>
+            </div>
+
+            <div class="clickable-item" onclick="window.open('work_exp/microchip.html', '_blank')">
+                <h3>Physical Design Engineer Intern - Microchip Technology</h3>
+                <p class="date-range">January 2023 - April 2023</p>
+                <div class="company-logo" style="background-image: url('resources/Microchip.png'); height: 100px; width: 100px; right: 50px;"></div>
+            </div> 
+
+            <!-- <div class="experience-item">
+                <h3>Software Engineer Intern - Citi</h3>
+                <p class="date-range"></p>May 2024 - August 2024</p>
+                <ul>
+                    <li>Contributed towards the risk team’s core library to build a scalable and performant distributed cache using Apache Ignite
+in-memory database, leveraging Java generics to ensure versatile data compatibility.</li>
+                    <li>Achieved a 20% speedup in cache request processing by migrating the legacy data access service to using Ignite scan queries,
+significantly enhancing cache access times across 10+ projects supported by the core library.</li>
+                    <li>Developed and deployed a Python package for a custom Splunk HEC log handler, utilizing a multithreaded model to
+effectively manage network latency and minimize performance impacts on applications.</li>
+                    <li>Enhanced code quality by adding 50+ unit tests using a TDD approach with Guice and JUnit, achieving 90% class coverage
+and ensuring robust test coverage</li>
+                </ul>
+            </div>
+            <div class="experience-item">
+                <h3>RF Software Engineer Intern - Netgear</h3>
+                <p class="date-range">May 2023 - December 2023</p>
+                <ul>
+                    <li>
+                        Developed 30+ Python library methods for an automated hotspot device validation framework using the SCPI protocol to
+interface remotely with CMX500 call boxes, enhancing RF testing capabilities with new LTE and NR 3GPP functionalities.
+                    </li>
+                    <li>
+                        Reduced calibration time by upto 60% and eliminated path-loss data spikes by completely redesigning the instrument
+                    calibration software for multiple call boxes, power meters and signal generators.
+                    </li>
+                    <li>Wrote an extendable library for PyQT using Matplotlib and multiprocessing to enable asynchronous graph rendering.</li>
+                    <li>
+                        Optimized the BLER test procedure, reducing completion time by 75% and preventing timeouts by developing an adaptive
+algorithm based on AIMD congestion handling protocol.
+                    </li>  
+                    <li>
+                    Streamlined deployment and updates across lab computers by creating a PyInstaller script to automatically parse project
+requirements and install executables, simplifying maintenance and setup.
+                    </li>
+                </ul>
+            </div>
+            <div class="experience-item">
+                <h3>Physical Design Engineer Intern - Microchip Technology</h3>
+                <p class="date-range">January 2023 - April 2023</p>
+                <ul>
+                    <li>Configured and debugged multiple Tcl, Bash and Perl scripts in a Unix environment as part of the complete PnR flow for
+TSMC and UMC tape-outs.</li>
+<li>Performed Logical Equivalency Checking (Conformal LEC) and Layout vs. Schematic (LVS) checks for 28nm and 16nm
+designs, while also contributing to Engineering Change Order (ECO) processes to ensure design integrity and functionality.</li>
+<li>Addressed 5+ DRC violations in Cadence Innovus by rerouting metal layer tracks and optimizing Via placements.</li>
+<li>Contributed to an internal Python GUI for analysis of Cadence tool logs by fixing multiple Regex and GUI bugs.</li>
+                </ul> -->
+            </div>
+
+               
+        </section>
+        <section id="projects">
+            <h2>Projects</h2>
+            <p>An incomplete list of stuff I worked on</p>
+            <div class="clickable-item" onclick="window.open('projects_blogs/cuda.html', '_blank')">
+                                <h3>Learning 
+                                    <img src="resources/Nvidia_CUDA.svg" alt="CUDA" style="height: 1.5em; vertical-align: middle;">
+                                    &hairsp;&mdash; Harnessing GPU magic
+                                </h3>
+            </div>
+            <div class="clickable-item" onclick="window.open('projects_blogs/tpu.html', '_blank')">
+                <h3>
+                    Systolic Arrays and TPUs
+                </h3>
+                <img src="resources/TPU.png" alt="TPU Icon" class="project-icon">
+            </div>
+
+            <div class="clickable-item" onclick="window.open('projects_blogs/search_engine.html', '_blank')">
+                <h3>
+                    An okayish Search Engine
+                    <img src="resources/search-engine.png" alt="Search Engine" class="project-icon" style="right: 225px;">
+                </h3>
+            </div>
+        </section>
+        <section id="contact">
+            <h2>Contact Me</h2>
+            <p>Email: aadityasuri01@gmail.com</p>
+            <div class="social-icons">
+                <a href="https://www.linkedin.com/in/aadityasuri/" target="_blank" title="LinkedIn Profile"><i class="fab fa-linkedin"></i></a>
+                <a href="https://github.com/AadityaSuri" target="_blank" title="GitHub Profile"><i class="fab fa-github"></i></a>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Your Name. All rights reserved.</p>
+    </footer>
+</body>
+</html>
