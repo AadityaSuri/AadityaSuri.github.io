@@ -25,6 +25,7 @@
             color: white;
             padding: 2rem 0;
             text-align: center;
+            position: relative; /* Add this */
         }
         header h1 {
             margin: 0;
@@ -245,10 +246,23 @@
             height: calc(100% - 40px);
             border: none;
         }
+
+        .profile-pic {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        object-fit: cover;
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        border: 3px solid white;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
     </style>
 </head>
 <body>
     <header>
+        <img src="resources/pp.jpeg" alt="Profile Picture" class="profile-pic">
         <h1>Aaditya Suri</h1> 
         <p>Software Engineer (maybe?)</p>
     </header>
@@ -292,7 +306,7 @@
                 </div>
 
                 <div class="clickable-item" data-url="projects_blogs/os161.html" style="background-image: url('resources/os161.webp')">
-                    <h3>OS161</h3>
+                    <h3>non-operating system</h3>
                 </div>
                 
             </div>
