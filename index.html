@@ -21,22 +21,11 @@
             color: var(--text-color);
         }
         header {
-            position: relative;
-            padding-left: 140px; /* Add left padding to make room for the image */
             background-color: var(--secondary-color);
             color: white;
             padding: 2rem 0;
             text-align: center;
-        }
-        .profile-pic {
-            position: absolute;
-            left: 20px;
-            top: 20px;
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 5px solid #000000;
+            position: relative; /* Add this */
         }
         header h1 {
             margin: 0;
@@ -187,6 +176,22 @@
         .social-icons a:hover, .social-icons a:active {
             color: var(--secondary-color);
         }
+        .resume-button {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: var(--primary-color);
+            /* padding: 10px 20px; */
+            /* border-radius: 5px; */
+            text-decoration: none;
+            margin-top: 10px;
+            transition: background-color 0.3s ease;
+            border: 1px solid var(--primary-color);
+            padding: 5px;
+        }
+
+        .resume-button:hover {
+            background-color: var(--accent-color-dark);
+        }
     </style>
 </head>
 <body>
@@ -296,6 +301,7 @@
                 <a href="https://www.linkedin.com/in/aadityasuri/" target="_blank" title="LinkedIn Profile: https://www.linkedin.com/in/aadityasuri/"><i class="fab fa-linkedin"></i></a>
                 <a href="https://github.com/AadityaSuri" target="_blank" title="GitHub Profile: https://github.com/AadityaSuri"><i class="fab fa-github"></i></a>
             </div>
+            <a href="resources/Aaditya_Suri_Resume_Website.pdf" class="resume-button" target="_blank">Get My Resume!</a>
         </section>
     </main>
     <footer>
