@@ -192,13 +192,58 @@
         .resume-button:hover {
             background-color: var(--accent-color-dark);
         }
+
+        .profile-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            width: 100%;
+        }
+
+        .click-me-image {
+            position: absolute;
+            left: calc(50% - 275px); /* Adjust this value as needed */
+            width: 200px; /* Adjust size as needed */
+            height: 100px;
+            transform: rotate(-60deg);
+        }
+
+        .profile-picture {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 5px solid black;
+            object-fit: cover;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .profile-picture:hover {
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .profile-picture.enlarged {
+            width: 200px;
+            height: 200px;
+            z-index: 100;
+            animation: spin 1.5s linear;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(1080deg); } /* 3 full rotations (360 * 3) */
+        }
     </style>
     <!-- Clicky Analytics Script -->
     <script async data-id="101463193" src="//static.getclicky.com/js"></script>
 </head>
 <body>
     <header>
-        <img src="resources/pp.jpeg" alt="Profile Picture" class="profile-pic">
+        <div class="profile-container">
+            <img src="resources/402aef60d9e2df22a5517157ca65cddc-removebg-preview.png" alt="clickme" class="click-me-image" id="clickme" />
+            <img src="resources/pp.jpeg" alt="Profile Picture" class="profile-picture" id="profilePic" />
+        </div>
         <h1>Aaditya Suri</h1> 
         <p>Software Engineer (maybe?)</p>
     </header>
@@ -310,5 +355,22 @@
     <footer>
         <!-- <p>&copy; 2Your Name. All rights reserved.</p> -->
     </footer>
+    <script>
+        const profilePic = document.getElementById('profilePic');
+        let isEnlarged = false;
+
+        profilePic.addEventListener('click', function() {
+            if (!isEnlarged) {
+                this.classList.add('enlarged');
+                isEnlarged = true;
+                
+                // Remove the class after the animation completes
+                setTimeout(() => {
+                    this.classList.remove('enlarged');
+                    isEnlarged = false;
+                }, 1500); // 1500ms = 1.5s, matching the animation duration
+            }
+        });
+    </script>
 </body>
 </html>

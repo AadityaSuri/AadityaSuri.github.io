@@ -89,7 +89,7 @@
                 <a href="https://en.wikipedia.org/wiki/Mandelbrot_set">here</a>.
             </p>
 
-            <h3>The struggle</h3>
+            <h2>The struggle</h2>
             <p>
                 Pretty basic algorithm right? Well, it turns out that rendering fractals is a compute-heavy task.
                 The good thing is that each pixel is independent of the others, so it's a perfect task for a GPU.
@@ -101,7 +101,7 @@
                 Luckily, I found this website called <a href="https://vast.ai/">Vast AI</a> that lets you rent consumer GPUs for really cheap.
             </p>
 
-            <h3>Okay but what is CUDA?</h3>
+            <h2>Okay but what is CUDA?</h2>
 
             <p>CUDA is a parallel computing platform and programming model created by NVIDIA. It allows developers to use the GPU's
                 parallel computing power to perform tasks that were previously the domain of CPUs.
@@ -120,7 +120,7 @@
 
             <p>My go to resource for learning CUDA was this book called "Programming Massively Parallel Processors"</p>
 
-            <h3>Baby's first CUDA program</h3>
+            <h2>Baby's first CUDA program</h2>
 
             <p>Starting with the basics, here's a simple CUDA program that adds two arrays:</p>
 
@@ -134,7 +134,7 @@
             <p>Note that this is only the kernel, we will also need some cudaMalloc and cudaMemcpy calls to actually use this kernel.</p>
             <p>The full code can be found <a href="https://github.com/AadityaSuri/cuda_learning/blob/master/vec_add/vec_add.cu">here</a>.</p>
 
-            <h4>Explanation</h4>
+            <h3>Explanation</h3>
 
             <p>
                 The __global__ keyword is used to declare a function that will be executed on the GPU.
@@ -148,7 +148,7 @@
                 The thread then adds the corresponding elements of a and b and stores the result in c.
             </p>
 
-            <h3>Adding some dimensions</h3>
+            <h2>Adding some dimensions</h2>
 
             <p>CUDA allows us to add multiple dimensions to our kernels, here's an example of a 2D kernel that adds two matrices:</p>
 
@@ -164,7 +164,7 @@
     }
 }</code></pre>
 
-            <h4>Explanation</h4>
+            <h3>Explanation</h3>
 
             <p>
             Let's break down this 2D CUDA kernel in a more approachable way:
@@ -259,7 +259,7 @@
             
             
             <!-- Add more content as needed -->
-            <h3>Matrix multiplication</h3>
+            <h2>Matrix multiplication</h2>
 
             <p>Other than just making pictures, one of main use cases of CUDA is to perform really fast matrix multiplication.</p>
 
@@ -269,7 +269,7 @@
 
             <p>A very detailed guide to matrix multiplication kernels in CUDA by Simon Boehm can be found <a href="https://siboehm.com/articles/22/CUDA-MMM">here</a>.</p>
            
-            <h3>Next steps</h3>
+            <h2>Next steps</h2>
 
             <p>There is still a lot more to learn! Some of the things I plan to explore in the near future are:
 
