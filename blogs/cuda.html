@@ -101,25 +101,109 @@
                 Luckily, I found this website called <a href="https://vast.ai/">Vast AI</a> that lets you rent consumer GPUs for really cheap.
             </p>
 
-            <p>Once that was sorted, I had to actually learn CUDA. my go to resource for this was this book called "Programming Massively Parallel Processors"</p>
+            <h3>Okay but what is CUDA?</h3>
 
-            <p>After several nights and days of pain (4 hours) I was finally able to write a simple CUDA kernel along with some simple image processing code 
-                to render a Mandelbrot set. 
+            <p>CUDA is a parallel computing platform and programming model created by NVIDIA. It allows developers to use the GPU's
+                parallel computing power to perform tasks that were previously the domain of CPUs.
             </p>
             
-            <p>Here are some results!</p>
+            <figure>
+                <img src="../resources/NVIDIA-CUDA-memory-model.png" alt="CUDA memory model" width="100%" height="100%">
+                <figcaption>CUDA memory model</figcaption>
+            </figure>
 
-            <img src="../resources/combined_mdbrot.jpg" alt="Mandelbrot set" width="100%" height="100%">
+            <p>
+                CUDA divides the work among many small processors called threads. These threads are grouped into smaller units called blocks,
+                and these blocks are further grouped into even larger units called grid. Threads within the same block can cooperate with each other,
+                but threads in different blocks cannot. This is called <b>cooperative multithreading</b>.
+            </p>
 
-            <h3>Speedup</h3>
+            <p>My go to resource for learning CUDA was this book called "Programming Massively Parallel Processors"</p>
 
-            <p>using CUDA also achieved significant speedup in rendering these images, take the following times for example:</p>
+            <h3>Baby's first CUDA program</h3>
 
-            <img src="../resources/speedup.png">
+            <p>Starting with the basics, here's a simple CUDA program that adds two arrays:</p>
 
-            <p>almost 40x speedup</p>
+            <pre class="code-block-small"><code class="language-cpp">__global__ void vectorAddKernel(const float *a, const float *b, float *c, int n) {
+    int idx = blockDim.x * blockIdx.x + threadIdx.x;
+    if (idx < n) {
+        c[idx] = a[idx] + b[idx];
+    }
+}</code></pre>
 
-            <p>The code for this can be found <a href="https://github.com/AadityaSuri/Mandelbrot_CUDA/">here</a>. main.cu contains all the cuda code and some other stuff needed to generate these images</p>
+            <p>Note that this is only the kernel, we will also need some cudaMalloc and cudaMemcpy calls to actually use this kernel.</p>
+            <p>The full code can be found <a href="https://github.com/AadityaSuri/cuda_learning/blob/master/vec_add/vec_add.cu">here</a>.</p>
+
+            <h4>Explanation</h4>
+
+            <p>
+                The __global__ keyword is used to declare a function that will be executed on the GPU.
+                The function takes in four arguments: two input arrays a and b, an output array c, and the size of the arrays n.
+                The function calculates the index of the thread in the grid using the blockDim and blockIdx variables.
+                The threadIdx variable is used to get the index of the thread within the block.
+            </p>
+
+            <p>
+                The if statement is used to ensure that the thread does not access out of bounds memory.
+                The thread then adds the corresponding elements of a and b and stores the result in c.
+            </p>
+
+            <h3>Adding some dimensions</h3>
+
+            <p>CUDA allows us to add multiple dimensions to our kernels, here's an example of a 2D kernel that adds two matrices:</p>
+
+            <pre class="code-block-small"><code class="language-cpp">__global__ void double_matrix_x_y(const float *a, float *res, int rows, int cols) {
+    int tid_x = blockDim.x * blockIdx.x + threadIdx.x;
+    int tid_y = blockDim.y * blockIdx.y + threadIdx.y;
+
+    int idx;
+    if (tid_x < cols && tid_y < rows) {
+        idx = tid_y * cols + tid_x;
+
+        res[idx] = a[idx] * 2;
+    }
+}</code></pre>
+
+            <h4>Explanation</h4>
+
+            <p>
+            Let's break down this 2D CUDA kernel in a more approachable way:
+
+            <ol>
+                <li>Thread Identification:
+                   <p>`tid_x` and `tid_y` calculate the unique position of each thread in the 2D grid. Think of it as assigning coordinates to each worker in a large warehouse.</p>
+                </li>
+
+                <li>Boundary Check:
+                   <p>The `if` statement ensures that each thread only operates within the matrix dimensions. It's like making sure each worker stays within their designated area.</p>
+                </li>
+
+                <li>Flattening 2D to 1D:
+                   <p>`idx = tid_y * cols + tid_x` converts the 2D position to a 1D index. This is similar to how we might number shelves in a warehouse - row by row.</p>
+                </li>
+
+                <li>The Operation:
+                   <p>`res[idx] = a[idx] * 2` is where each thread performs its task. In this case, it's doubling the value at its assigned position.</p>
+                </li>
+            </ol>
+
+            This kernel efficiently parallelizes the process of doubling each element in a 2D matrix, with each thread handling one element simultaneously.
+            </p>
+
+            <p>The full code for this can be found <a href="https://github.com/AadityaSuri/cuda_learning/blob/master/2d_func/2d_array_func.cu">here</a>.</p>
+
+            <h2>Back to fractals</h2>
+
+            <p>
+                Now that we have some experience under our belt, let's try to render a Mandelbrot set using CUDA!
+            </p>
+
+            <p>
+                Basically we just need to modify our 2D kernel to perform the escape time algorithm.
+                We also need a way to store the result, and to do this we can use cudaMalloc to allocate memory for the image.
+                We also need to make sure that our kernel is launched with the correct number of threads and blocks.
+                This is where the concepts of threads, blocks and grids come in.
+            </p>
 
             <p>This is what the CUDA kernel looks like:</p>
 
@@ -157,12 +241,43 @@
         image[index] = (unsigned char) b;      // Blue
     }
 }</code></pre>
+
+            <p>Here are some results!</p>
+
+            <img src="../resources/combined_mdbrot.jpg" alt="Mandelbrot set" width="100%" height="100%">
+
+            <h3>Speedup</h3>
+
+            <p>using CUDA also achieved significant speedup in rendering these images, take the following times for example:</p>
+
+            <img src="../resources/speedup.png">
+
+            <p><strong>almost 40x speedup!</strong></p>
+
+            <p>The code for this can be found <a href="https://github.com/AadityaSuri/Mandelbrot_CUDA/">here</a>. main.cu contains all the cuda code and some other stuff needed to generate these images</p>
+
+            
             
             <!-- Add more content as needed -->
-            <h3>Some more learnings</h3>
+            <h3>Matrix multiplication</h3>
 
-            <p>Other than just making pictures, CUDA can also be used for other things like matrix multiplication, neural network inference, and even machine learning!</p>
-        
+            <p>Other than just making pictures, one of main use cases of CUDA is to perform really fast matrix multiplication.</p>
+
+            <p>There are a few ways to write efficient kernels for matrix multiplication, I explore some of them in this 
+                <a href="https://github.com/AadityaSuri/cuda_learning/blob/master/matmul/matmul.cu">file</a>.
+            </p>    
+
+            <p>A very detailed guide to matrix multiplication kernels in CUDA by Simon Boehm can be found <a href="https://siboehm.com/articles/22/CUDA-MMM">here</a>.</p>
+           
+            <h3>Next steps</h3>
+
+            <p>There is still a lot more to learn! Some of the things I plan to explore in the near future are:
+
+                <ul>
+                    <li>Implementing a basic Flash Attention kernel</li>
+                    <li>Writing a CNN from scratch using CUDA</li> 
+                </ul>
+            </p>
         </div>
     </main>
 </body>
